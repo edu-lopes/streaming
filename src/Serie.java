@@ -28,4 +28,8 @@ public class Serie {
     public String getPlanoNecessario() {
         return planoNecessario;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
 }
