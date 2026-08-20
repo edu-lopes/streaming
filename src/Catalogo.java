@@ -3,10 +3,12 @@ import java.util.ArrayList;
 
 public class Catalogo {
     private ArrayList<Serie> series;
+    private ArrayList<Filme> filmes;
     private ArrayList<Usuario> usuarios;
 
     public Catalogo() {
         series = new ArrayList<>();
+        filmes = new ArrayList<>();
         usuarios = new ArrayList<>();
 
         Usuario cleber = new Usuario(
@@ -96,6 +98,21 @@ public class Catalogo {
         ));
 
         series.add(breakingBad);
+
+        Filme duna = new Filme(
+                "Duna",
+                "Um jovem herdeiro embarca numa jornada num planeta desértico.",
+                155,
+                "Premium"
+        );
+        filmes.add(duna);
+
+        douglas.adicionarFavorito(duna);
+
+        douglas.adicionarFavorito(breakingBad);
+
+        cleber.adicionarFavorito(strangerThings);
+
     }
 
     public void exibirCatalogo() {
@@ -103,14 +120,30 @@ public class Catalogo {
             serie.exibirInfo();
 
             System.out.println("Usuários com acesso:");
-
             for (Usuario usuario : usuarios) {
                 if (usuario.getAssinatura().getPlano().equals(serie.getPlanoNecessario())) {
                     System.out.println("- " + usuario.getNome());
                 }
             }
-
             System.out.println();
         }
+
+        for (Filme filme : filmes) {
+            filme.exibirInfo();
+
+            System.out.println("Usuários com acesso:");
+
+            for (Usuario usuario : usuarios) {
+                if (usuario.getAssinatura().getPlano().equals(filme.getPlanoNecessario())) {
+                    System.out.println("- " + usuario.getNome());
+                }
+            }
+            System.out.println();
+        }
+
+        for (Usuario usuario : usuarios) {
+            usuario.exibirFavoritos();
+        }
+
     }
 }
