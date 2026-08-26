@@ -23,6 +23,10 @@ public class Usuario {
     }
 
     public void adicionarFavorito(Filme filme) {
+        if (filme == null) {
+            throw new IllegalArgumentException("O filme não pode ser nulo.");
+        }
+
         if (listaFavoritosFilmes.contains(filme)) {
             throw new IllegalArgumentException("Esse filme já está nos favoritos.");
         }
@@ -31,6 +35,10 @@ public class Usuario {
     }
 
     public void adicionarFavorito(Serie serie) {
+        if (serie == null) {
+            throw new IllegalArgumentException("A série não pode ser nula.");
+        }
+
         if (listaFavoritosSeries.contains(serie)) {
             throw new IllegalArgumentException("Essa série já está nos favoritos.");
         }
@@ -56,9 +64,5 @@ public class Usuario {
 
     public String getNome() {
         return nome;
-    }
-
-    public Assinatura getAssinatura() {
-        return assinatura;
     }
 }

@@ -31,7 +31,7 @@ public class Catalogo {
 
             System.out.println("Usuários com acesso:");
             for (Usuario usuario : usuarios) {
-                if (usuario.getAssinatura().getPlano().equals(serie.getPlanoNecessario())) {
+                if (usuario.podeAssistir(serie.getPlanoNecessario())) {
                     System.out.println("- " + usuario.getNome());
                 }
             }
@@ -44,7 +44,7 @@ public class Catalogo {
             System.out.println("Usuários com acesso:");
 
             for (Usuario usuario : usuarios) {
-                if (usuario.getAssinatura().getPlano().equals(filme.getPlanoNecessario())) {
+                if (usuario.podeAssistir(filme.getPlanoNecessario())) {
                     System.out.println("- " + usuario.getNome());
                 }
             }
