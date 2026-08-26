@@ -7,6 +7,15 @@ public class Usuario {
     private ArrayList<Serie> listaFavoritosSeries;
 
     public Usuario(String nome, Assinatura assinatura) {
+        // Validações
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("O nome do usuário não pode ser vazio.");
+        }
+
+        if (assinatura == null) {
+            throw new IllegalArgumentException("O usuário deve possuir uma assinatura.");
+        }
+
         this.nome = nome;
         this.assinatura = assinatura;
         this.listaFavoritosFilmes = new ArrayList<>();
