@@ -1,121 +1,31 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Catalogo {
     private ArrayList<Serie> series;
     private ArrayList<Filme> filmes;
-    private ArrayList<Usuario> usuarios;
 
     public Catalogo() {
         series = new ArrayList<>();
         filmes = new ArrayList<>();
-        usuarios = new ArrayList<>();
-
-        Usuario cleber = new Usuario(
-                "Cleber",
-                new Assinatura("Basico")
-        );
-
-        Usuario eduardo = new Usuario(
-                "Eduardo",
-                new Assinatura("Padrao")
-        );
-
-        Usuario guilherme = new Usuario(
-                "Guilherme",
-                new Assinatura("Premium")
-        );
-
-        Usuario douglas = new Usuario(
-                "Douglas",
-                new Assinatura("Padrao")
-        );
-
-        Usuario victor = new Usuario(
-                "Victor",
-                new Assinatura("Premium")
-        );
-
-        Usuario gabriel = new Usuario(
-                "Gabriel",
-                new Assinatura("Basico")
-        );
-
-        usuarios.add(cleber);
-        usuarios.add(eduardo);
-        usuarios.add(guilherme);
-        usuarios.add(douglas);
-        usuarios.add(victor);
-        usuarios.add(gabriel);
-
-
-        Serie strangerThings = new Serie(
-                "Stranger Things",
-                "Um grupo de amigos enfrenta acontecimentos misteriosos em sua cidade.",
-                "Basico"
-        );
-
-        strangerThings.adicionarEpisodio(new Episodio(
-                "O desaparecimento de Will Byers",
-                1,
-                1,
-                "Os amigos começam a investigar acontecimentos estranhos na cidade.",
-                LocalDate.parse("2026-02-28")
-        ));
-
-        series.add(strangerThings);
-
-
-        Serie theLastOfUs = new Serie(
-                "The Last of Us",
-                "Após uma pandemia devastadora, dois sobreviventes atravessam os Estados Unidos.",
-                "Padrao"
-        );
-
-        theLastOfUs.adicionarEpisodio(new Episodio(
-                "Quando estamos precisando",
-                1,
-                2,
-                "Joel e Ellie iniciam uma jornada perigosa pelos Estados Unidos.",
-                LocalDate.parse("2026-03-15")
-        ));
-
-        series.add(theLastOfUs);
-
-
-        Serie breakingBad = new Serie(
-                "Breaking Bad",
-                "Um professor de química começa a produzir drogas para sustentar sua família.",
-                "Premium"
-        );
-
-        breakingBad.adicionarEpisodio(new Episodio(
-                "Piloto",
-                1,
-                1,
-                "Walter White começa a produzir metanfetamina para conseguir dinheiro.",
-                LocalDate.parse("2026-04-10")
-        ));
-
-        series.add(breakingBad);
-
-        Filme duna = new Filme(
-                "Duna",
-                "Um jovem herdeiro embarca numa jornada num planeta desértico.",
-                155,
-                "Premium"
-        );
-        filmes.add(duna);
-
-        douglas.adicionarFavorito(duna);
-
-        douglas.adicionarFavorito(breakingBad);
-
-        cleber.adicionarFavorito(strangerThings);
-
     }
 
-    public void exibirCatalogo() {
+    public void adicionarSerie(Serie serie) {
+        if (serie == null) {
+            throw new IllegalArgumentException("A serie nao pode ser nula.");
+        }
+
+        series.add(serie);
+    }
+
+    public void adicionarFilme(Filme filme) {
+        if (filme == null) {
+            throw new IllegalArgumentException("O filme nao pode ser nulo.");
+        }
+
+        filmes.add(filme);
+    }
+
+    public void exibirCatalogo(ArrayList<Usuario> usuarios) {
         for (Serie serie : series) {
             serie.exibirInfo();
 
@@ -144,6 +54,5 @@ public class Catalogo {
         for (Usuario usuario : usuarios) {
             usuario.exibirFavoritos();
         }
-
     }
 }

@@ -1,12 +1,25 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
 
-        // 2 criações válidas de objetos;
+        Catalogo catalogo = new Catalogo();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
         Usuario cleber = new Usuario(
                 "Cleber",
                 new Assinatura("Basico")
+        );
+
+        Usuario eduardo = new Usuario(
+                "Eduardo",
+                new Assinatura("Padrao")
+        );
+
+        Usuario guilherme = new Usuario(
+                "Guilherme",
+                new Assinatura("Premium")
         );
 
         Usuario douglas = new Usuario(
@@ -14,9 +27,58 @@ public class Main {
                 new Assinatura("Padrao")
         );
 
-        // 2 operações válidas;
+        Usuario victor = new Usuario(
+                "Victor",
+                new Assinatura("Premium")
+        );
 
-        // Adicionando uma série com com 1 ep
+        Usuario gabriel = new Usuario(
+                "Gabriel",
+                new Assinatura("Basico")
+        );
+
+        usuarios.add(cleber);
+        usuarios.add(eduardo);
+        usuarios.add(guilherme);
+        usuarios.add(douglas);
+        usuarios.add(victor);
+        usuarios.add(gabriel);
+
+
+        Serie strangerThings = new Serie(
+                "Stranger Things",
+                "Um grupo de amigos enfrenta acontecimentos misteriosos em sua cidade.",
+                "Basico"
+        );
+
+        strangerThings.adicionarEpisodio(new Episodio(
+                "O desaparecimento de Will Byers",
+                1,
+                1,
+                "Os amigos começam a investigar acontecimentos estranhos na cidade.",
+                LocalDate.parse("2026-02-28")
+        ));
+
+        catalogo.adicionarSerie(strangerThings);
+
+
+        Serie theLastOfUs = new Serie(
+                "The Last of Us",
+                "Após uma pandemia devastadora, dois sobreviventes atravessam os Estados Unidos.",
+                "Padrao"
+        );
+
+        theLastOfUs.adicionarEpisodio(new Episodio(
+                "Quando estamos precisando",
+                1,
+                2,
+                "Joel e Ellie iniciam uma jornada perigosa pelos Estados Unidos.",
+                LocalDate.parse("2026-03-15")
+        ));
+
+        catalogo.adicionarSerie(theLastOfUs);
+
+
         Serie breakingBad = new Serie(
                 "Breaking Bad",
                 "Um professor de química começa a produzir drogas para sustentar sua família.",
@@ -31,28 +93,23 @@ public class Main {
                 LocalDate.parse("2026-04-10")
         ));
 
-        // Adicionando um filme
+        catalogo.adicionarSerie(breakingBad);
+
+
         Filme duna = new Filme(
                 "Duna",
                 "Um jovem herdeiro embarca numa jornada num planeta desértico.",
                 155,
-                "Basico"
-        );
-
-        // 2 tentativas de alteração inválida e o comportamento adotado pelo programa
-        Filme filme = new Filme(
-                "Interestelar",
-                "Um filme sobre viagem espacial.",
-                0,
                 "Premium"
         );
 
-        Usuario guilherme = new Usuario(
-                "",
-                new Assinatura("Premium")
-        );
+        catalogo.adicionarFilme(duna);
 
-        // 1 caso em que um metodo de negócio protege melhor o objeto do que um setter genérico.
-        cleber.podeAssistir(breakingBad.getPlanoNecessario());
+
+        douglas.adicionarFavorito(duna);
+        douglas.adicionarFavorito(breakingBad);
+        cleber.adicionarFavorito(strangerThings);
+
+        catalogo.exibirCatalogo(usuarios);
     }
 }
