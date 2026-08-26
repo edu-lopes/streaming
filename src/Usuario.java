@@ -22,12 +22,24 @@ public class Usuario {
         this.listaFavoritosSeries = new ArrayList<>();
     }
 
-    public void adicionarFavorito(Filme filme){
+    public void adicionarFavorito(Filme filme) {
+        if (listaFavoritosFilmes.contains(filme)) {
+            throw new IllegalArgumentException("Esse filme já está nos favoritos.");
+        }
+
         listaFavoritosFilmes.add(filme);
     }
 
     public void adicionarFavorito(Serie serie) {
+        if (listaFavoritosSeries.contains(serie)) {
+            throw new IllegalArgumentException("Essa série já está nos favoritos.");
+        }
+
         listaFavoritosSeries.add(serie);
+    }
+
+    public boolean podeAssistir(String planoNecessario) {
+        return assinatura.cobrePlano(planoNecessario);
     }
 
     public void exibirFavoritos() {

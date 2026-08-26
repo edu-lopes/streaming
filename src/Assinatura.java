@@ -17,4 +17,27 @@ public class Assinatura {
     public String getPlano() {
         return plano;
     }
+
+    public boolean cobrePlano(String planoNecessario) {
+        int nivelAssinatura = obterNivel(plano);
+        int nivelNecessario = obterNivel(planoNecessario);
+
+        return nivelAssinatura >= nivelNecessario;
+    }
+
+    private int obterNivel(String plano) {
+        if (plano.equals("Basico")) {
+            return 1;
+        }
+
+        if (plano.equals("Padrao")) {
+            return 2;
+        }
+
+        if (plano.equals("Premium")) {
+            return 3;
+        }
+
+        throw new IllegalArgumentException("Plano inválido.");
+    }
 }
