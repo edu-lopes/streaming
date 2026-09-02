@@ -110,6 +110,22 @@ public class Main {
         douglas.adicionarFavorito(breakingBad);
         cleber.adicionarFavorito(strangerThings);
 
+        // Polimorfismo: a referência é do tipo Midia, mas o objeto real é Filme ou Serie.
+        // A mesma chamada exibirInfo() executa a versão sobrescrita de cada subclasse.
+        System.out.println("=== POLIMORFISMO ===");
+        System.out.println();
+
+        Midia a = duna;
+        Midia b = strangerThings;
+
+        a.exibirInfo();
+        System.out.println();
+        b.exibirInfo();
+        System.out.println();
+
+        System.out.println("=== CATALOGO ===");
+        System.out.println();
+
         catalogo.exibirCatalogo(usuarios);
     }
 }
