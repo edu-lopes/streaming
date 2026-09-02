@@ -59,7 +59,7 @@ public class Main {
                 LocalDate.parse("2026-02-28")
         ));
 
-        catalogo.adicionarSerie(strangerThings);
+        catalogo.adicionar(strangerThings);
 
 
         Serie theLastOfUs = new Serie(
@@ -76,7 +76,7 @@ public class Main {
                 LocalDate.parse("2026-03-15")
         ));
 
-        catalogo.adicionarSerie(theLastOfUs);
+        catalogo.adicionar(theLastOfUs);
 
 
         Serie breakingBad = new Serie(
@@ -93,7 +93,7 @@ public class Main {
                 LocalDate.parse("2026-04-10")
         ));
 
-        catalogo.adicionarSerie(breakingBad);
+        catalogo.adicionar(breakingBad);
 
 
         Filme duna = new Filme(
@@ -103,7 +103,7 @@ public class Main {
                 "Premium"
         );
 
-        catalogo.adicionarFilme(duna);
+        catalogo.adicionar(duna);
 
 
         douglas.adicionarFavorito(duna);
