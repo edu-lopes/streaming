@@ -12,5 +12,9 @@ public class Filme extends Midia {
         this.duracaoMinutos = duracaoMinutos;
     }
 
-    // fazer a atividade 08 aq utilizando como override o exibirInfo()
+    @Override
+    public void exibirInfo() {
+        super.exibirInfo();
+        System.out.println("Duração: " + duracaoMinutos + " minutos.");
+    }
 }

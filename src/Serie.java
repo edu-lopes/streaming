@@ -13,5 +13,9 @@ public class Serie extends Midia{
         episodios.add(episodio);
     }
 
-    // fazer a atividade 08 aq utilizando como override o exibirInfo()
+    @Override
+    public void exibirInfo() {
+        super.exibirInfo();
+        System.out.println("Episódios: " + episodios.size());
+    }
 }
