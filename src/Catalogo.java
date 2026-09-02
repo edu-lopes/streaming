@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+    import java.util.ArrayList;
 
-public class Catalogo {
+    public class Catalogo {
     private ArrayList<Serie> series;
     private ArrayList<Filme> filmes;
 
@@ -9,21 +9,21 @@ public class Catalogo {
         filmes = new ArrayList<>();
     }
 
-    public void adicionarSerie(Serie serie) {
-        if (serie == null) {
-            throw new IllegalArgumentException("A serie nao pode ser nula.");
-        }
-
-        series.add(serie);
+    public void adicionar(Serie serie) {
+    if (serie == null) {
+        throw new IllegalArgumentException("A serie nao pode ser nula.");
     }
 
-    public void adicionarFilme(Filme filme) {
-        if (filme == null) {
-            throw new IllegalArgumentException("O filme nao pode ser nulo.");
-        }
+    series.add(serie);
+}
 
-        filmes.add(filme);
+    public void adicionar(Filme filme) {
+    if (filme == null) {
+        throw new IllegalArgumentException("O filme nao pode ser nulo.");
     }
+
+    filmes.add(filme);
+}
 
     public void exibirCatalogo(ArrayList<Usuario> usuarios) {
         for (Serie serie : series) {
