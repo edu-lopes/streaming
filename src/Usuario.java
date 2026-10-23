@@ -1,10 +1,13 @@
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Usuario {
     private String nome;
     private Assinatura assinatura;
-    private ArrayList<Filme> listaFavoritosFilmes;
-    private ArrayList<Serie> listaFavoritosSeries;
+    // Set: um usuário não pode favoritar a mesma mídia duas vezes.
+    // LinkedHashSet mantém a ordem em que os favoritos foram adicionados.
+    private Set<Midia> favoritos;
 
     public Usuario(String nome, Assinatura assinatura) {
         // Validações
@@ -18,32 +21,36 @@ public class Usuario {
 
         this.nome = nome;
         this.assinatura = assinatura;
-        this.listaFavoritosFilmes = new ArrayList<>();
-        this.listaFavoritosSeries = new ArrayList<>();
+        this.favoritos = new LinkedHashSet<>();
     }
 
-    public void adicionarFavorito(Filme filme) {
-        if (filme == null) {
-            throw new IllegalArgumentException("O filme não pode ser nulo.");
+    // Aceita qualquer Midia (Filme ou Serie): polimorfismo no lugar de duas sobrecargas.
+    public void adicionarFavorito(Midia midia) {
+        if (midia == null) {
+            throw new IllegalArgumentException("A mídia não pode ser nula.");
         }
 
-        if (listaFavoritosFilmes.contains(filme)) {
-            throw new IllegalArgumentException("Esse filme já está nos favoritos.");
+        // add() devolve false quando o elemento já existe no Set
+        if (!favoritos.add(midia)) {
+            throw new IllegalArgumentException("\"" + midia.getTitulo() + "\" já está nos favoritos.");
         }
-
-        listaFavoritosFilmes.add(filme);
     }
 
-    public void adicionarFavorito(Serie serie) {
-        if (serie == null) {
-            throw new IllegalArgumentException("A série não pode ser nula.");
+    // Iterator: percorre os favoritos e remove com segurança os que ficaram indisponíveis.
+    // Remover dentro de um for-each lançaria ConcurrentModificationException.
+    public int removerFavoritosIndisponiveis() {
+        int removidos = 0;
+        Iterator<Midia> it = favoritos.iterator();
+
+        while (it.hasNext()) {
+            Midia midia = it.next();
+            if (!midia.isDisponivel()) {
+                it.remove();
+                removidos++;
+            }
         }
 
-        if (listaFavoritosSeries.contains(serie)) {
-            throw new IllegalArgumentException("Essa série já está nos favoritos.");
-        }
-
-        listaFavoritosSeries.add(serie);
+        return removidos;
     }
 
     public boolean podeAssistir(String planoNecessario) {
@@ -53,12 +60,8 @@ public class Usuario {
     public void exibirFavoritos() {
         System.out.println("Favoritos de " + nome + ":");
 
-        for (Filme filme : listaFavoritosFilmes) {
-            System.out.println("- " + filme.getTitulo());
-        }
-
-        for (Serie serie : listaFavoritosSeries) {
-            System.out.println("- " + serie.getTitulo());
+        for (Midia midia : favoritos) {
+            System.out.println("- " + midia.getTitulo());
         }
     }
 
